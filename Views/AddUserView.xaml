@@ -1,0 +1,60 @@
+﻿<Window x:Class="PaintShopManagement.Views.AddUserView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PaintShopManagement.Views"
+        mc:Ignorable="d"
+        Title="AddUserView" Height="550" Width="400">
+    <Grid ShowGridLines="False">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" x:Name="LblUserName" Content="User Name" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" Width="100"/>
+        <TextBox Grid.Row="0" x:Name="TbxUserName" HorizontalAlignment="Left" Margin="120,24,0,0" TextWrapping="Wrap" Text="{Binding UserName}" VerticalAlignment="Top" Width="200"/>
+
+        <Label Grid.Row="1" x:Name="LblPassword" Content="Password" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" Width="100"/>
+        <TextBox Grid.Row="1" x:Name="TbxPassword" HorizontalAlignment="Left" Margin="120,24,0,0" TextWrapping="Wrap" Text="{Binding PlainTextPassword}" VerticalAlignment="Top" Width="200"/>
+
+        <Label Grid.Row="2" x:Name="LblFirstName" Content="First Name" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" Width="100"/>
+        <TextBox Grid.Row="2" x:Name="TbxFirstName" HorizontalAlignment="Left" Margin="120,24,0,0" TextWrapping="Wrap" Text="{Binding FirstName}" VerticalAlignment="Top" Width="200"/>
+
+        <Label Grid.Row="3" x:Name="LblLastName" Content="Last Name" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" Width="100"/>
+        <TextBox Grid.Row="3" x:Name="TbxLastName" HorizontalAlignment="Left" Margin="120,24,0,0" TextWrapping="Wrap" Text="{Binding LastName}" VerticalAlignment="Top" Width="200"/>
+
+        <Label Grid.Row="4" x:Name="LblEmail" Content="Email" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" Width="100"/>
+        <TextBox Grid.Row="4" x:Name="TbxEmail" HorizontalAlignment="Left" Margin="120,24,0,0" TextWrapping="Wrap" Text="{Binding Email}" VerticalAlignment="Top" Width="200"/>
+
+        <Label Grid.Row="5" x:Name="LblPhone" Content="Phone" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" Width="100"/>
+        <TextBox Grid.Row="5" x:Name="TbxPhone" HorizontalAlignment="Left" Margin="120,24,0,0" TextWrapping="Wrap" Text="{Binding Phone}" VerticalAlignment="Top" Width="200"/>
+
+
+        <Label Grid.Row="6" x:Name="LblPosition" Content="Position" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" Width="100"/>
+        <ComboBox Grid.Row="6" x:Name="positionComboBox" SelectedValuePath="Tag" SelectedValue="{Binding SelectedPosition}" SelectedIndex="1" Margin="120,21,0,0" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top" >
+            <ComboBoxItem Content="Admin" Tag="1"/>
+            <ComboBoxItem Content="Employee" Tag="2"/>
+        </ComboBox>
+
+        <Label Grid.Row="7" x:Name="LblFileUpload" Content="Upload File" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Width="100"/>
+        <StackPanel Grid.Row="7" Orientation="Horizontal" Margin="120,15,0,0">
+            <TextBox x:Name="TbxFilePath" IsReadOnly="True" Width="200" VerticalAlignment="Top" Text="{Binding TbxFilePath, Mode=TwoWay}"/>
+            <Button Content="Browse" Command="{Binding BrowseButtonCommand}" Margin="10, 0,0,0"/>
+        </StackPanel>
+
+        <Button Grid.Row="8" x:Name="BtnCreateUser" Content="Create User" Command="{Binding CreateUserCommand}" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button Grid.Row="8" x:Name="BtnCancel" Content="Cancel" Command="{Binding CancelCommand}" HorizontalAlignment="Left" Margin="200,20,0,0" VerticalAlignment="Top" Width="120"/>
+
+        <Label Grid.Row="9" x:Name="LblError" Content="{Binding ErrorMessage}" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" Width="380" Height="45"/>
+
+    </Grid>
+</Window>

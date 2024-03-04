@@ -1,0 +1,274 @@
+﻿<Window x:Class="PaintShopManagement.Views.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fontawesome="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+        xmlns:local="clr-namespace:PaintShopManagement.Views"
+        xmlns:viewModel = "clr-namespace:PaintShopManagement.ViewModels"
+        xmlns:converters="clr-namespace:PaintShopManagement.Converters"
+        mc:Ignorable="d"
+        Title="MainWindowView" Height="600" Width="950"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle = "None"
+        AllowsTransparency="True">
+
+    <Window.Resources>
+
+        <!-- Data Templates Start-->
+        <DataTemplate DataType="{ x:Type viewModel:DashboardViewModel}">
+            <local:DashboardView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{ x:Type viewModel:InventoryViewModel}">
+            <local:InventoryView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{ x:Type viewModel:CustomerViewModel}">
+            <local:CustomerView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{ x:Type viewModel:EmployeeViewModel}">
+            <local:EmployeeView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{ x:Type viewModel:OrderViewModel}">
+            <local:OrderView />
+        </DataTemplate>
+        <!-- Data Templates End-->
+
+        <converters:BlobToImageConverter x:Key="BlobToImageConverter"/>
+    </Window.Resources>
+
+    <Window.DataContext>
+        <viewModel:MainViewModel />
+    </Window.DataContext>
+
+    <Border CornerRadius="10"
+            BorderThickness="1">
+
+        <Border.BorderBrush>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="{StaticResource winBorderColor1}" Offset="0" />
+                <GradientStop Color="{StaticResource winBorderColor2}" Offset="0" />
+            </LinearGradientBrush>
+        </Border.BorderBrush>
+
+        <Grid>
+
+            <!-- Side Bar -->
+            <Grid.ColumnDefinitions>
+                <!-- Navigation Menu -->
+                <ColumnDefinition Width="250" />
+                <!-- Dashboard -->
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Navigation Content -->
+            <Border Grid.Column="0">
+
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                        <GradientStop Color="{ StaticResource navColor1 }" Offset="1" />
+                        <GradientStop Color="{ StaticResource navColor2 }" Offset="0"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+
+
+                <!-- Navigation Items -->
+                <StackPanel>
+
+                    <!-- Logo -->
+                    <StackPanel Orientation="Horizontal"
+                                    Height="35"
+                                    Margin="15,25,0,40">
+                        <Image Source="/Images/loginbg.jpg"
+                                    Stretch="Fill"
+                                    Height="30"/>
+                        <TextBlock Text="Colorful Buckets" 
+                                       Foreground="{StaticResource titleColor1}" 
+                                       FontSize="20"
+                                       FontFamily="Montserrat"
+                                       Margin="10,0,0,0"/>
+
+                    </StackPanel>
+
+
+                    <!-- Navigation Links -->
+
+                    <!-- Dashboard -->
+                    <RadioButton Style="{ StaticResource links }"
+                                         Tag="{ StaticResource color1 }"
+                                     Command="{Binding ShowDashboardViewCommand}">
+
+                        <StackPanel Orientation="Horizontal">
+                            <fontawesome:IconImage Icon="Home" Style="{ StaticResource linksIcon }" />
+                            <TextBlock Text="Dashboard" Style="{ StaticResource linkText }" />
+                        </StackPanel>
+                    </RadioButton>
+
+                    <!-- Inventory -->
+                    <RadioButton Style="{ StaticResource links }"
+                                     Tag="{ StaticResource color1 }"
+                                     Command = "{Binding ShowInventoryViewCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <fontawesome:IconImage Icon="TableList" Style="{ StaticResource linksIcon }" />
+                            <TextBlock Text="Inventory" Style="{ StaticResource linkText }" />
+                        </StackPanel>
+                    </RadioButton>
+
+                    <!-- Customers -->
+                    <RadioButton Style="{ StaticResource links }"
+                                  Tag="{ StaticResource color1 }"
+                                  Command = "{Binding ShowCustomerViewCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <fontawesome:IconImage Icon="UserGroup" Style="{ StaticResource linksIcon }" />
+                            <TextBlock Text="Customers" Style="{ StaticResource linkText }" />
+                        </StackPanel>
+                    </RadioButton>
+
+                    <!-- Employees -->
+                    <RadioButton Style="{ StaticResource links }"
+                                         Tag="{ StaticResource color1 }"
+                                           Command = "{Binding ShowEmployeeViewCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <fontawesome:IconImage Icon="AddressBook" Style="{ StaticResource linksIcon }" />
+                            <TextBlock Text="Employees" Style="{ StaticResource linkText }" />
+                        </StackPanel>
+                    </RadioButton>
+
+                    <!-- Orders -->
+                    <RadioButton Style="{ StaticResource links }"
+                                         Tag="{ StaticResource color1 }"
+                                           Command = "{Binding ShowOrderViewCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <fontawesome:IconImage Icon="Truck" Style="{ StaticResource linksIcon }" />
+                            <TextBlock Text="Orders" Style="{ StaticResource linkText }" />
+                        </StackPanel>
+                    </RadioButton>
+                </StackPanel>
+            </Border>
+
+            <!-- Main Content -->
+            <Border 
+                        Grid.Column="1">
+
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
+                        <GradientStop Color="{ StaticResource contentColor1 }" Offset="1" />
+                        <GradientStop Color="{ StaticResource contentColor2 }" Offset="0"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <!-- Control Bar -->
+                        <RowDefinition Height="25" />
+                        <!-- Header / Title -->
+                        <RowDefinition Height="35" />
+                        <!-- Content / Child views -->
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <!-- Control bar -->
+                    <StackPanel x:Name= "ControlBar"
+                                    Grid.Row ="0"
+                                    Orientation="Horizontal"
+                                    FlowDirection="RightToLeft"
+                                    Background="Transparent"
+                                    Margin="0,0,10,0"
+                                    MouseLeftButtonDown="ControlBar_MouseLeftButtonDown"
+                                    MouseEnter="ControlBar_MouseEnter">
+
+                        <Button x:Name="btnCLose"
+                                    Style="{ StaticResource iconBtn}"
+                                    Tag="{ StaticResource color2}"
+                                    Click="btnCLose_Click">
+                            <fontawesome:IconImage Icon="Xmark" Style="{ StaticResource iconBtnIcon }" />
+                        </Button>
+
+                        <Button x:Name="btnMaximize"
+                                    Style="{ StaticResource iconBtn}"
+                                    Tag="{ StaticResource color2}"
+                                    Click="btnMaximize_Click">
+                            <fontawesome:IconImage Icon="WindowMaximize" Style="{ StaticResource iconBtnIcon }" />
+                        </Button>
+
+                        <Button x:Name="btnMinimize"
+                                    Style="{ StaticResource iconBtn}"
+                                    Tag="{ StaticResource color2}"
+                                    Click="btnMinimize_Click">
+                            <fontawesome:IconImage Icon="WindowMinimize" Style="{ StaticResource iconBtnIcon }" />
+                        </Button>
+
+                    </StackPanel>
+
+                    <!-- Header  -->
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Main Content Title -->
+                        <StackPanel Grid.Column="0"
+                                        Orientation="Horizontal"
+                                        VerticalAlignment="Center">
+
+                            <fontawesome:IconImage Icon="{Binding Icon}"
+                                                       Height="20"
+                                                       Width="20"
+                                                       Foreground="{ StaticResource titleColor1 }"
+                                                       Margin="34,0,10,0" />
+                            <TextBlock Text="{ Binding Caption }"
+                                           Foreground="{StaticResource titleColor1}"
+                                           FontSize="16"
+                                           FontFamily="Montserrat"
+                                           FontWeight="Medium"
+                                           VerticalAlignment="Center" />
+                        </StackPanel>
+
+                        <!-- User Option -->
+                        <StackPanel Grid.Column="1"
+                                        Orientation="Horizontal"
+                                        FlowDirection="RightToLeft"
+                                        VerticalAlignment="Center"
+                                        Margin="0,0,15,0">
+
+                            <Button Style="{StaticResource iconBtn }"
+                                        Tag="{ StaticResource color1 }">
+                                <fontawesome:IconImage Icon="AngleDown" 
+                                                           Height="12" Width="12"
+                                                           Style="{ StaticResource iconBtnIcon }" />
+
+                            </Button>
+
+                            <!-- Username -->
+                            <TextBlock Text="{ Binding CurrentUserAccount.DisplayName }" 
+                                               Foreground="{ StaticResource titleColor1 }"
+                                               FontFamily="Montserrat"
+                                               FontSize="14"
+                                               VerticalAlignment="Center" />
+                            <!-- User profile pic TODO: Make it dynamic fetching in DB-->
+                            <Ellipse Height="35" Width="35"
+                                         Stroke="{ StaticResource color2}"
+                                         Margin="10,0,10,0">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="{Binding Path=ProfilePicBlob}" />
+                                </Ellipse.Fill>
+                            </Ellipse>
+
+                        </StackPanel>
+
+                    </Grid>
+
+                    <!-- Content / Child Views -->
+                    <ContentControl Content="{ Binding CurrentChildView }" 
+                                        Grid.Row="2"
+                                        Margin="25"/>
+                </Grid>
+            </Border>
+
+        </Grid>
+    </Border>
+</Window>
